@@ -65,17 +65,8 @@ var oneMovie = function(response) {
 
 var multiMovie = function(response) {
       $('.modal-title').text('Search Results');
-      var resultObj = {};
-      for (var i = 0; i < 5; i++) {
-        resultObj = response.Search[i];
-        console.log(resultObj);
-        for (var key in resultObj) {
-          if (key !== 'Poster' && key !== 'Type') {
-            $('#searchResults').append(key + ': ' + resultObj[key] + '<br>');
-          };
-        };
-        $('#searchResults').append('<br><br>');
-      };
+      var keyword = $('.inputEmail-1').val();
+      searchMovie(keyword);
     };
 
 var updateMovie = function(title) {
@@ -94,14 +85,18 @@ var updateMovie = function(title) {
     });
 };
 
-$('#searchResults').on('click', function() {
-  console.log($('#searchResults'));
-    var title = movieTitle;
-    console.log(title);
-    debugger;
-    updateMovie('Mulan');
 
-  });
+
+function searchMovie (keyword) {
+        var url = 'https://www.omdbapi.com/?s=' + keyword;
+        $.get(url).done(function(res) {
+            res.Search.forEach(function(obj) {
+                // $('#results').append('<img src="' + obj.Poster + '">');
+                $('#searchResults').append('<li><a href="" id="' + obj.Title + '">' + obj.Title + '</a>&nbsp;-&nbsp;' + obj.Year + '</li>');
+            });
+            console.log(res);
+        });
+    };
 
 var resetForm = function() {
   $('input').val('');
