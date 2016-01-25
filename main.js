@@ -67,6 +67,7 @@ var multiMovie = function(response) {
       $('.modal-title').text('Search Results');
       var keyword = $('.inputEmail-1').val();
       searchMovie(keyword);
+      oneMovie(newTitle);
     };
 
 var updateMovie = function(title) {
@@ -92,9 +93,9 @@ function searchMovie (keyword) {
         $.get(url).done(function(res) {
             res.Search.forEach(function(obj) {
                 // $('#results').append('<img src="' + obj.Poster + '">');
-                $('#searchResults').append('<li><a href="" id="' + obj.Title + '">' + obj.Title + '</a>&nbsp;-&nbsp;' + obj.Year + '</li>');
+                $('#searchResults').append('<li><a href="#" id="' + obj.Title + '">' + obj.Title + '</a>&nbsp;-&nbsp;' + obj.Year + '</li>');
             });
-            console.log(res);
+
         });
     };
 
