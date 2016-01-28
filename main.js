@@ -17,6 +17,12 @@ $(document).ready(function() {
     resetForm();
   });
 
+  $(document).on('click', 'a', function(event) {
+    event.preventDefault();
+    var newTitle = $(this).attr('id');
+    updateMovie(newTitle);
+  });
+
 
   var searchMovie = function() {
     var baseURL = 'http://www.omdbapi.com/?';
